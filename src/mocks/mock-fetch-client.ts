@@ -2,9 +2,9 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-28 15:23:22
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 16:09:10
+ * @Last Modified time: 2020-02-04 16:20:05
  */
-import { FetchResult } from '../fetch/fetch-result';
+import { FetchResult  } from '../fetch/fetch-result';
 import { props } from '../common/props';
 
 const mockFetchClient = (() => {

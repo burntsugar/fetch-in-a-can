@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:58
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 15:17:23
+ * @Last Modified time: 2020-02-04 16:18:49
  */
 
 
@@ -19,9 +19,10 @@ const fetchClient = (() => {
      * - 400 Bad Request - Problems parsing JSON, payload must be JSON/stringified. -browser
      * - 401 Unauthorised - Problem with access token. -service
      * - 404 Not found - Problem with path segment. -browser
-     * @param {string} baseUrl
+     * @param {string  } baseUrl
      * @param {string} stringifiedPayload
      * @param {string} accessToken
+     * @return {Promise<FetchResult>}
      */
   const fetchNow = async (baseUrl: string, stringifiedPayload: string, accessToken: string): Promise<FetchResult> => {
     return await client(baseUrl, stringifiedPayload, accessToken);

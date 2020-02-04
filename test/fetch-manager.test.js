@@ -5,9 +5,9 @@
  * @Last Modified time: 2020-02-04 16:09:22
  */
 
-import { fetchManager } from '../out/fetch/fetch-manager';
-import { mockFetchClient } from '../out/mocks/mock-fetch-client';
-import { props } from '../out/common/props';
+import {fetchManager} from '../out/fetch/fetch-manager';
+import {mockFetchClient} from '../out/mocks/mock-fetch-client';
+import {props} from '../out/common/props';
 
 describe('genericFetchController#fetchNow', () => {
   const badAccessToken = '123xyz';
