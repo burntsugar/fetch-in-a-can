@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-29 13:55:23
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 15:17:43
+ * @Last Modified time: 2020-02-04 16:08:57
  */
 
 
@@ -14,7 +14,7 @@
 class FetchResult {
 
   _status: string;
-  _body:object
+  _body: object
 
   /**
      * @constructor
@@ -61,4 +61,4 @@ class FetchResult {
   }
 }
 
-export {FetchResult};
+export { FetchResult };

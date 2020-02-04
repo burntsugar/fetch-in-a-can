@@ -8,9 +8,7 @@
 
 import fetch, { Response } from 'node-fetch';
 import { FetchResult } from './fetch-result';
-import {fetchClientInterface} from './fetch-client-interface'
-
-
+import { fetchClientInterface } from './fetch-client-interface'
 
 const fetchClient = (() => {
   /**
