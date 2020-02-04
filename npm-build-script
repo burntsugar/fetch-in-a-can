@@ -1,0 +1,6 @@
+rm -rf dist
+mkdir dist
+cp -r out/src dist/
+cp -r npm-assets/ dist/
+cp babel.config.js dist/
+echo "fin"

@@ -1,0 +1,21 @@
+{
+  "name": "fetch-in-a-can",
+  "version": "1.0.0",
+  "description": "Fetch library for Node.js",
+  "main": "src/fetch-in-a-can.js",
+  "author": {
+    "name": "burntsugar",
+    "email": "rrr@burntsugar.rocks",
+    "url": "https://github.com/burntsugar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/burntsugar/fetch-in-a-can.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "^7.8.3",
+    "esm": "^3.2.25",
+    "node-fetch": "^2.6.0"
+  }
+}
