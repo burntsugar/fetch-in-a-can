@@ -10,7 +10,15 @@
     "test": "jest",
     "tsc": "node node_modules/.bin/tsc"
   },
-  "author": "",
+  "author": {
+    "name": "burntsugar",
+    "email": "rrr@burntsugar.rocks",
+    "url": "https://github.com/burntsugar"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/burntsugar/fetch-in-a-can.git"
+  },
   "license": "ISC",
   "dependencies": {
     "@babel/preset-env": "^7.8.3",

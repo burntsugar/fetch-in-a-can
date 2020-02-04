@@ -1,8 +1,8 @@
 /*
- * @Author: rach@rach.colley
+ * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:36
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 15:09:13
+ * @Last Modified time: 2020-02-04 15:18:00
  */
 
 import {fetchManager} from '../out/fetch/fetch-manager';
