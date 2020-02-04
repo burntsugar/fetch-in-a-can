@@ -4,3 +4,4 @@ keys.js
 
 .DS_Store
 ignore*
+out/

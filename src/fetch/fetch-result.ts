@@ -1,8 +1,8 @@
 /*
  * @Author: rach@rach.colley
  * @Date: 2020-01-29 13:55:23
- * @Last Modified by: rach@rach.colley
- * @Last Modified time: 2020-01-29 19:37:06
+ * @Last Modified by: rrr@burntsugar.rocks
+ * @Last Modified time: 2020-02-04 15:04:59
  */
 
 
@@ -12,12 +12,16 @@
    * of the fetch operation.
    */
 class FetchResult {
+
+  _status: string;
+  _body:object
+
   /**
      * @constructor
      * @param {string} status
-     * @param {string} body
+     * @param {object} body
      */
-  constructor(status, body) {
+  constructor(status: string, body: object) {
     this._status = status;
     this._body = body;
   }
@@ -25,34 +29,34 @@ class FetchResult {
   /**
    * @return {string} String representation of the object.
    */
-  toString() {
+  toString(): string {
     return `_status: ${this._status}, _body ${this._body}`;
   }
 
   /**
-     * @return {number} status
+     * @return {string} status
      */
-  get status() {
+  get status(): string {
     return this._status;
   }
 
   /**
-   * @param {number} status
+   * @param {string} status
    */
-  set status(status) {
+  set status(status: string) {
     this._status = status;
   }
   /**
      * @return {object} body
      */
-  get body() {
+  get body(): object {
     return this._body;
   }
 
   /**
    * @param {object} body
    */
-  set body(body) {
+  set body(body: object) {
     this._body = body;
   }
 }
