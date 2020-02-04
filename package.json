@@ -1,14 +1,16 @@
 {
   "name": "fetch-in-a-can",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Fetch library for Node.js",
+  "main": "src/fetch-in-a-can.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "jest",
-    "tsc": "node node_modules/.bin/tsc"
+    "tsc": "node node_modules/.bin/tsc",
+    "lint": "node node_modules/.bin/eslint . --fix",
+    "buildnpm": "./npm-build-script"
   },
   "author": {
     "name": "burntsugar",
@@ -23,9 +25,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.8.3",
     "esm": "^3.2.25",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.0",
-    "save-dev": "0.0.1-security"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.1",

@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:51
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 17:04:22
+ * @Last Modified time: 2020-02-04 19:11:40
  */
 
 import { fetchClient } from './fetch-client';
@@ -13,7 +13,7 @@ import { FetchResultInterface } from './fetch-result-interface';
 const fetchManager = (() => {
   let internalCLient: fetchClientInterface = fetchClient;
 
-  const setFetchClient = (client: fetchClientInterface) => {
+  const setFetchClient = (client: fetchClientInterface):void => {
     internalCLient = client;
   };
 
