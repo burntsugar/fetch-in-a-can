@@ -2,16 +2,16 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-29 13:55:23
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 16:08:57
+ * @Last Modified time: 2020-02-04 17:55:16
  */
 
-
+import { FetchResultInterface } from './fetch-result-interface';
 /**
    * @class FetchResult
    * @description Defines an object which contains the result
    * of the fetch operation.
    */
-class FetchResult {
+class FetchResult implements FetchResultInterface {
 
   _status: string;
   _body: object
@@ -36,27 +36,27 @@ class FetchResult {
   /**
      * @return {string} status
      */
-  get status(): string {
+  getStatus(): string {
     return this._status;
   }
 
   /**
    * @param {string} status
    */
-  set status(status: string) {
+  setStatus(status: string): void {
     this._status = status;
   }
   /**
      * @return {object} body
      */
-  get body(): object {
+  getBody(): object {
     return this._body;
   }
 
   /**
    * @param {object} body
    */
-  set body(body: object) {
+  setBody(body: object): void {
     this._body = body;
   }
 }

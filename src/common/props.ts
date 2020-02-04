@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:55:54
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-01-30 01:42:53
+ * @Last Modified time: 2020-02-04 17:54:35
  */
 
 const props = (() => {
@@ -10,7 +10,7 @@ const props = (() => {
   enum STATUS_CODE {
     OK = 200,
     UNAUTHORIZED = 401,
-    FETCH_ERROR = 'FETCH_ERROR',
+    FETCH_ERROR = -1000,
   };
 
   enum STATUS_NAME {
@@ -32,4 +32,4 @@ const props = (() => {
   };
 })();
 
-export {props};
+export { props };

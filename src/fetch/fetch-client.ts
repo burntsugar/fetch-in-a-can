@@ -2,13 +2,14 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:58
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 16:18:49
+ * @Last Modified time: 2020-02-04 17:48:22
  */
 
 
-import fetch, { Response } from 'node-fetch';
+import fetch from 'node-fetch';
 import { FetchResult } from './fetch-result';
-import { fetchClientInterface } from './fetch-client-interface'
+import { FetchResultInterface } from './fetch-result-interface';
+
 
 const fetchClient = (() => {
   /**
@@ -22,14 +23,14 @@ const fetchClient = (() => {
      * @param {string  } baseUrl
      * @param {string} stringifiedPayload
      * @param {string} accessToken
-     * @return {Promise<FetchResult>}
+     * @return {Promise<FetchResultInterface>}
      */
-  const fetchNow = async (baseUrl: string, stringifiedPayload: string, accessToken: string): Promise<FetchResult> => {
+  const fetchNow = async (baseUrl: string, stringifiedPayload: string, accessToken: string): Promise<FetchResultInterface> => {
     return await client(baseUrl, stringifiedPayload, accessToken);
   };
 
-  const client = async (baseUrl: string, payload: string, accessToken: string): Promise<FetchResult> => {
-    let response: FetchResult = await fetch(baseUrl, {
+  const client = async (baseUrl: string, payload: string, accessToken: string): Promise<FetchResultInterface> => {
+    let response: FetchResultInterface = await fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,10 +43,10 @@ const fetchClient = (() => {
     }).catch((error) => {
       return makeFetchResult(error.name, { error: `${error.name}, ${error.message}` });
     });
-    return await response;
+    return response;
   };
 
-  const makeFetchResult = (status: string, body: object): FetchResult => {
+  const makeFetchResult = (status: string, body: object): FetchResultInterface => {
     return new FetchResult(status, body);
   };
 
