@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:58
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 18:56:28
+ * @Last Modified time: 2020-02-05 10:17:12
  */
 
 
@@ -39,7 +39,8 @@ const fetchClient = (() => {
       },
       body: payload,
     }).then((data) => {
-      return makeFetchResult(data.status.toString(), data.body);
+      // return makeFetchResult(data.status.toString(), data.body);
+      return makeFetchResult(data.status.toString(), data.json());
     }).catch((error) => {
       return makeFetchResult(error.name, { error: `${error.name}, ${error.message}` });
     });
