@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-28 15:23:22
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-05 14:34:42
+ * @Last Modified time: 2020-02-05 17:23:00
  */
 
 import { FetchResult } from '../src/fetch/fetch-result';
