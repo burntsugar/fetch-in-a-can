@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:36
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-05 10:46:07
+ * @Last Modified time: 2020-02-05 10:57:28
  */
 
 import { fetchManager } from '../src/fetch/fetch-manager';
@@ -79,7 +79,7 @@ describe('fetchManager#fetchData', () => {
         const login: string = 'burntsugar';
         const body: string = `query MyQuery { user(login: "${login}") { bio avatarUrl(size: 200) url login name } }`;
         const sq = JSON.stringify({ query: body });
-
+console.log(sq);
         const data: FetchResultInterface = await fetchManagerInTest.fetchData(BASE_URL, sq, envKeys.GITHUB_API_KEY_BAD);
         expect(data.getStatus()).toEqual(props.STATUS_CODE.UNAUTHORIZED.toString());
       });

@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:51
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 19:11:40
+ * @Last Modified time: 2020-02-05 11:04:42
  */
 
 import { fetchClient } from './fetch-client';
@@ -17,8 +17,8 @@ const fetchManager = (() => {
     internalCLient = client;
   };
 
-  const fetchData = async (baseUrl: string, payload: string, accessToken: string): Promise<FetchResultInterface> => {
-    const data: FetchResultInterface = await internalCLient.fetchNow(baseUrl, payload, accessToken);
+  const fetchData = async (apiBaseUrl: string, jsonPayload: string, apiAccessToken: string): Promise<FetchResultInterface> => {
+    const data: FetchResultInterface = await internalCLient.fetchNow(apiBaseUrl, jsonPayload, apiAccessToken);
     return data;
   };
 
