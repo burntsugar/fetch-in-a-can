@@ -2,14 +2,13 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:58
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-05 12:26:18
+ * @Last Modified time: 2020-02-05 14:39:01
  */
-
 
 import fetch from 'node-fetch';
 import { FetchResult } from './fetch-result';
 import { FetchResultInterface } from './fetch-result-interface';
-
+import { FetchOptionsInterface } from './fetch-options';
 
 const fetchClient = (() => {
   /**
@@ -20,42 +19,53 @@ const fetchClient = (() => {
      * - 400 Bad Request - Problems parsing JSON, payload must be JSON/stringified. -browser
      * - 401 Unauthorised - Problem with access token. -service
      * - 404 Not found - Problem with path segment. -browser
-     * @param {string  } apiBaseUrl
-     * @param {string} jsonPayload
-     * @param {string} apiAccessToken
+     * @param {string} apiBaseUrl
+     * @param {FetchOptionsInterface} fetchOptions
      * @return {Promise<FetchResultInterface>}
      */
-  const fetchNow = async (apiBaseUrl: string, jsonPayload: string, apiAccessToken: string): Promise<FetchResultInterface> => {
-    return await client(apiBaseUrl, jsonPayload, apiAccessToken);
+  const fetchNow = async (apiBaseUrl: string, fetchOptions: FetchOptionsInterface): Promise<FetchResultInterface> => {
+    const requestParams = buildRequestInfo(fetchOptions);
+    return await client(apiBaseUrl, requestParams);
   };
 
-  const client = async (apiBaseUrl: string, jsonPayload: string, apiAccessToken: string): Promise<FetchResultInterface> => {
-
-    const requestInfo: object = buildRequestInfo(jsonPayload, apiAccessToken);
-
-    let response: FetchResultInterface = await fetch(apiBaseUrl, requestInfo).then((data) => {
+  const client = async (apiBaseUrl: string, requestInf: object): Promise<FetchResultInterface> => {
+    let response: FetchResultInterface = await fetch(apiBaseUrl, requestInf).then((data) => {
       return makeFetchResult(data.status.toString(), data.json());
     }).catch((error) => {
       return makeFetchResult(error.name, { error: `${error.name}, ${error.message}` });
     });
     return response;
   };
+  const buildRequestInfo = (fetchOptions: FetchOptionsInterface): object => {
 
-  const buildRequestInfo = (jsonPayload: string, apiAccessToken: string): object => {
     const CONTENT_TYPE_APPL_JSON = 'application/json';
     const ACCEPT_TYPE_APPL_JSON = 'application/json';
 
-    const reqHeaders = {
+    interface MyReqHeadersType {
+      [key: string]: string,
+    }
+    let reqHeaders: MyReqHeadersType = {
       'Content-Type': CONTENT_TYPE_APPL_JSON,
       'Accept': ACCEPT_TYPE_APPL_JSON,
-      'Authorization': `Bearer ${apiAccessToken}`,
     }
 
-    const initParams = {
+    interface MyInitParamsType {
+      method: string,
+      headers: MyReqHeadersType,
+      body?: string
+    }
+    const initParams: MyInitParamsType = {
       method: 'POST',
       headers: reqHeaders,
-      body: jsonPayload,
     };
+
+    if (fetchOptions.getApiAccessToken()) {
+      reqHeaders['Authorization'] = `Bearer ${fetchOptions.getApiAccessToken()}`;
+    }
+
+    if (fetchOptions.getJsonPayload()) {
+      initParams['body'] = fetchOptions.getJsonPayload();
+    }
 
     return initParams;
   };

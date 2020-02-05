@@ -2,11 +2,13 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-28 15:23:22
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-04 17:54:24
+ * @Last Modified time: 2020-02-05 14:34:42
  */
+
 import { FetchResult } from '../src/fetch/fetch-result';
 import { props } from '../src/common/props';
 import { FetchResultInterface } from '../src/fetch/fetch-result-interface';
+import { FetchOptionsInterface } from '../src/fetch/fetch-options';
 
 const mockFetchClient = (() => {
 
@@ -37,7 +39,7 @@ const mockFetchClient = (() => {
     }
   };
 
-  const fetchNow = async (baseUrl: string, stringifiedPayload: string, accessToken: string): Promise<FetchResultInterface> => {
+  const fetchNow = async (baseUrl: string, fetchOptions: FetchOptionsInterface): Promise<FetchResultInterface> => {
     switch (baseUrl) {
       case '/fetch200':
         return fetch200();
@@ -45,7 +47,7 @@ const mockFetchClient = (() => {
         return fetch401();
       case '/fetchForceFetchError':
         return fetchForceFetchError();
-      default: return fetchUser(stringifiedPayload);
+      default: return fetchUser(fetchOptions.getJsonPayload());
     }
   };
 
