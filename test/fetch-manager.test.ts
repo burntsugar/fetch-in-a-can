@@ -2,7 +2,7 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:36
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-05 17:39:45
+ * @Last Modified time: 2020-02-05 21:32:31
  */
 
 import { fetchManager } from '../src/fetch/fetch-manager';

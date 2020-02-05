@@ -59,6 +59,6 @@
   },
   "include": [
     "src/**/*",
-    "test", "mocks"
+    "test/fetch-manager.test.ts", "mocks"
 ]
 }
