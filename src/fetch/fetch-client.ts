@@ -2,13 +2,12 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-30 00:52:58
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-05 21:20:06
+ * @Last Modified time: 2020-02-06 13:00:11
  */
 
 import fetch from 'node-fetch';
 import { FetchResult } from './fetch-result';
 import { FetchResultInterface } from './fetch-result-interface';
-import { FetchOptionsInterface } from './fetch-options';
 
 const fetchClient = (() => {
   /**
@@ -20,54 +19,40 @@ const fetchClient = (() => {
      * - 401 Unauthorised - Problem with access token. -service
      * - 404 Not found - Problem with path segment. -browser
      * @param {string} apiBaseUrl
-     * @param {FetchOptionsInterface} fetchOptions
+     * @param {string} payload
+     * @param {apiAccessToken} string
      * @return {Promise<FetchResultInterface>}
      */
-  const fetchNow = async (apiBaseUrl: string, fetchOptions: FetchOptionsInterface): Promise<FetchResultInterface> => {
-    const requestParams = buildRequestInfo(fetchOptions);
-    return await client(apiBaseUrl, requestParams);
-  };
-
-  const client = async (apiBaseUrl: string, requestInf: object): Promise<FetchResultInterface> => {
-    let response: FetchResultInterface = await fetch(apiBaseUrl, requestInf).then((data) => {
+  const fetchPostGraphQLApi = async (apiBaseUrl: string, payload: string, apiAccessToken: string): Promise<FetchResultInterface> => {
+    let response: FetchResultInterface = await fetch(apiBaseUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + apiAccessToken,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: payload,
+    }).then((data) => {
       return makeFetchResult(data.status.toString(), data.json());
     }).catch((error) => {
       return makeFetchResult(error.name, { error: `${error.name}, ${error.message}` });
     });
     return response;
   };
-  const buildRequestInfo = (fetchOptions: FetchOptionsInterface): object => {
 
-    const CONTENT_TYPE_APPL_JSON = 'application/json';
-    const ACCEPT_TYPE_APPL_JSON = 'application/json';
-
-    interface MyReqHeadersType {
-      [key: string]: string,
-    }
-    let reqHeaders: MyReqHeadersType = {
-      'Content-Type': CONTENT_TYPE_APPL_JSON,
-      'Accept': ACCEPT_TYPE_APPL_JSON,
-    }
-
-    interface MyInitParamsType {
-      method: string,
-      headers: MyReqHeadersType,
-      body?: string
-    }
-    const initParams: MyInitParamsType = {
-      method: 'POST',
-      headers: reqHeaders,
-    };
-
-    if (fetchOptions.getApiAccessToken()) {
-      reqHeaders['Authorization'] = `Bearer ${fetchOptions.getApiAccessToken()}`;
-    }
-
-    if (fetchOptions.getJsonPayload()) {
-      initParams['body'] = fetchOptions.getJsonPayload();
-    }
-
-    return initParams;
+  const fetchGetRestApi = async (endpoint: string): Promise<FetchResultInterface> => {
+    let response: FetchResultInterface = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+    }).then((data) => {
+      return makeFetchResult(data.status.toString(), data.json());
+    }).catch((error) => {
+      return makeFetchResult(error.name, { error: `${error.name}, ${error.message}` });
+    });
+    return response;
   };
 
   const makeFetchResult = (status: string, body: object): FetchResultInterface => {
@@ -75,9 +60,9 @@ const fetchClient = (() => {
   };
 
   return {
-    fetchNow: fetchNow,
+    fetchPostGraphQLApi: fetchPostGraphQLApi,
+    fetchGetRestApi: fetchGetRestApi,
   };
 })();
 
 export { fetchClient };
-
