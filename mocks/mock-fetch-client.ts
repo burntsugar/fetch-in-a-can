@@ -2,15 +2,16 @@
  * @Author: rrr@burntsugar.rocks
  * @Date: 2020-01-28 15:23:22
  * @Last Modified by: rrr@burntsugar.rocks
- * @Last Modified time: 2020-02-05 17:23:00
+ * @Last Modified time: 2020-02-06 14:50:48
  */
 
 import { FetchResult } from '../src/fetch/fetch-result';
 import { props } from '../src/common/props';
 import { FetchResultInterface } from '../src/fetch/fetch-result-interface';
-import { FetchOptionsInterface } from '../src/fetch/fetch-options';
 
 const mockFetchClient = (() => {
+
+  const api3Response = '{ "login": "burntsugar", "id": 6642149, "node_id": "MDQ6VXNlcjY2NDIxNDk=", "avatar_url": "https://avatars1.githubusercontent.com/u/6642149?v=4", "gravatar_id": "", "url": "https://api.github.com/users/burntsugar", "html_url": "https://github.com/burntsugar", "followers_url": "https://api.github.com/users/burntsugar/followers", "following_url": "https://api.github.com/users/burntsugar/following{/other_user}", "gists_url": "https://api.github.com/users/burntsugar/gists{/gist_id}", "starred_url": "https://api.github.com/users/burntsugar/starred{/owner}{/repo}", "subscriptions_url": "https://api.github.com/users/burntsugar/subscriptions", "organizations_url": "https://api.github.com/users/burntsugar/orgs", "repos_url": "https://api.github.com/users/burntsugar/repos", "events_url": "https://api.github.com/users/burntsugar/events{/privacy}", "received_events_url": "https://api.github.com/users/burntsugar/received_events", "type": "User", "site_admin": false, "name": "Rach", "company": null, "blog": "", "location": "Melbourne, Australia", "email": null, "hireable": null, "bio": "Software development. MEL, AU", "public_repos": 22, "public_gists": 0, "followers": 14, "following": 8, "created_at": "2014-02-10T18:14:56Z", "updated_at": "2020-01-31T08:54:29Z" }'
 
   enum users {
     burntsugar = '{ "data": { "user": { "bio": "Software development. MEL, AU", "avatarUrl": "https://avatars2.githubusercontent.com/u/6642149?s=200&v=4", "url": "https://github.com/burntsugar", "login": "burntsugar", "name": "Rach" } } }',
@@ -39,7 +40,11 @@ const mockFetchClient = (() => {
     }
   };
 
-  const fetchNow = async (baseUrl: string, fetchOptions: FetchOptionsInterface): Promise<FetchResultInterface> => {
+  const fetchPostGraphQLApi = async (apiBaseUrl: string, payload: string, apiAccessToken: string): Promise<FetchResultInterface> => {
+    return fetchNow(apiBaseUrl, payload, apiAccessToken);
+  };
+
+  const fetchNow = async (baseUrl: string, jsonPayload: string, apiAccessToken: string): Promise<FetchResultInterface> => {
     switch (baseUrl) {
       case '/fetch200':
         return fetch200();
@@ -47,7 +52,7 @@ const mockFetchClient = (() => {
         return fetch401();
       case '/fetchForceFetchError':
         return fetchForceFetchError();
-      default: return fetchUser(fetchOptions.getJsonPayload());
+      default: return fetchUser(jsonPayload);
     }
   };
 
@@ -99,12 +104,18 @@ const mockFetchClient = (() => {
     return extracted;
   };
 
+  const fetchGetRestApi = async (endpoint: string): Promise<FetchResultInterface> => {
+    return makeFetchResult('200', JSON.parse(api3Response));
+  }
+
+
   const makeFetchResult = (status: string, body: object): FetchResultInterface => {
     return new FetchResult(status, body);
   };
 
   return {
-    fetchNow: fetchNow,
+    fetchPostGraphQLApi: fetchPostGraphQLApi,
+    fetchGetRestApi: fetchGetRestApi,
   };
 })();
 
