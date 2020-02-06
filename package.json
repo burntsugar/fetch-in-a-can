@@ -39,7 +39,7 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/out"
+      "<rootDir>out/"
     ]
   }
 }
